@@ -1,11 +1,15 @@
 //* Dart Packages
-import 'dart:developer';
+// import 'dart:developer';
 
 //* Packages
 import 'package:flutter/material.dart';
 
 //* Services
 import '../../Controller/Services/movie_service.dart';
+
+//* Widgets
+import '../Widgets/movie_slider.dart';
+import '../Widgets/horizontal_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,8 +19,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<dynamic> popularMovies = [];
+  List<dynamic> topRatedMovies = [];
+  List<dynamic> upcomingMovies = [];
+  List<dynamic> filteredMovies = [];
+
+  bool isSearchEmpty = true;
+  bool isLoading = true;
+
   Widget searchBar() {
     return Container(
+      margin: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -42,14 +55,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    printData();
+    fetchMovies();
     super.initState();
   }
 
-  printData() {
+  fetchMovies() async {
     MovieServices movieServices = MovieServices();
-    final data = movieServices.popularMovies();
-    log(data.toString());
+    popularMovies = await movieServices.popularMovies();
+    topRatedMovies = await movieServices.topRatedMovies();
+    upcomingMovies = await movieServices.upcomingMovies();
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -58,9 +75,70 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           const SizedBox(
-            height: 10,
+            height: 50,
           ),
           searchBar(),
+          isLoading
+              ? const CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "TopRated Movies",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    MovieSlider(topRatedMovies: topRatedMovies),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Upcoming Movies",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    HorizontalView(movies: upcomingMovies),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Popular Movies",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    HorizontalView(movies: popularMovies),
+                  ],
+                ),
         ],
       ),
     );
