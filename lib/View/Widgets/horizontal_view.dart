@@ -21,7 +21,7 @@ class HorizontalView extends StatelessWidget {
                   'https://image.tmdb.org/t/p/w200${movie['poster_path']}',
                   width: 150,
                   height: 200,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.cover
                 ),
                 const SizedBox(
                   height: 5,
