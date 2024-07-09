@@ -29,7 +29,11 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 final movie = upcomingMovies[index];
                 return GestureDetector(
                   onTap: () {},
-                  child: Card(),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusDirectional.circular(10),
+                    ),
+                  ),
                 );
               }),
             ),
