@@ -25,17 +25,20 @@ class _MoviesScreenState extends State<MoviesScreen> {
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              children: List.generate(upcomingMovies.length, (index) {
-                final movie = upcomingMovies[index];
-                return GestureDetector(
-                  onTap: () {},
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusDirectional.circular(10),
+              children: List.generate(
+                upcomingMovies.length,
+                (index) {
+                  final movie = upcomingMovies[index];
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusDirectional.circular(10),
+                      ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                },
+              ),
             ),
     );
   }
