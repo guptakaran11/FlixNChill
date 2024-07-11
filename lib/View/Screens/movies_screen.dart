@@ -17,9 +17,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
       appBar: AppBar(title: const Text("upcoming movies")),
       body: isLoading
           ? const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
+              child: CircularProgressIndicator(color: Colors.white),
             )
           : GridView.count(
               crossAxisCount: 2,
