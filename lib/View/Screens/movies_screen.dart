@@ -1,4 +1,8 @@
+//* Packages
 import 'package:flutter/material.dart';
+
+//* Services
+import '../../Controller/Services/movie_service.dart';
 
 class MoviesScreen extends StatefulWidget {
   const MoviesScreen({super.key});
@@ -11,13 +15,30 @@ class _MoviesScreenState extends State<MoviesScreen> {
   List<dynamic> upcomingMovies = [];
 
   bool isLoading = true;
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() async {
+    MovieServices movieServices = MovieServices();
+    upcomingMovies = await movieServices.upcomingMovies();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("upcoming movies")),
       body: isLoading
           ? const Center(
-              child: CircularProgressIndicator(color: Colors.white),
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
             )
           : GridView.count(
               crossAxisCount: 2,
@@ -32,6 +53,35 @@ class _MoviesScreenState extends State<MoviesScreen> {
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusDirectional.circular(10),
+                      ),
+                      elevation: 5,
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            child: Image.network(
+                              'https://image.tmdb.org/t/p/w200${movie['backdrop_path']}',
+                              width: double.infinity,
+                              height: 130,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              movie['title'],
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
