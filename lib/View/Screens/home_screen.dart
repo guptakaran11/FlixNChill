@@ -1,15 +1,8 @@
-//* Dart Packages
-// import 'dart:developer';
-
-//* Packages
 import 'package:flutter/material.dart';
-
-//* Services
 import '../../Controller/Services/movie_service.dart';
-
-//* Widgets
 import '../Widgets/movie_slider.dart';
 import '../Widgets/horizontal_view.dart';
+import '../Utilities/filtered_movie_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +20,28 @@ class _HomePageState extends State<HomePage> {
   bool isSearchEmpty = true;
   bool isLoading = true;
 
+  void filterMovies(String query) {
+    setState(() {
+      filteredMovies = popularMovies
+              .where((movie) =>
+                  movie['title'].toLowerCase().contains(query.toLowerCase()))
+              .toList() +
+          upcomingMovies
+              .where((movie) =>
+                  movie['title'].toLowerCase().contains(query.toLowerCase()))
+              .toList() +
+          topRatedMovies
+              .where((movie) =>
+                  movie['title'].toLowerCase().contains(query.toLowerCase()))
+              .toList();
+      if (query.isEmpty) {
+        isSearchEmpty = true;
+      } else {
+        isSearchEmpty = false;
+      }
+    });
+  }
+
   Widget searchBar() {
     return Container(
       margin: const EdgeInsets.all(12),
@@ -42,9 +57,18 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       padding: const EdgeInsets.all(4),
-      child: const TextField(
+      child: TextField(
+        onChanged: (value) {
+          if (value.isEmpty) {
+            setState(() {
+              isSearchEmpty = true;
+            });
+          } else {
+            filterMovies(value);
+          }
+        },
         autocorrect: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Search Movies...",
           border: InputBorder.none,
           prefixIcon: Icon(Icons.search),
@@ -71,74 +95,103 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
+    return Scaffold(
+      body: Stack(
         children: [
-          const SizedBox(
-            height: 50,
+          Padding(
+            padding: const EdgeInsets.only(top: 70.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 70,
+                  ),
+                  isLoading
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : !isSearchEmpty
+                          ? Column(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.all(16),
+                                  child: Text(
+                                    'Filtered Movies',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child:
+                                      FilteredMovieList(movies: filteredMovies),
+                                ),
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    "Top Rated Movies",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                MovieSlider(topRatedMovies: topRatedMovies),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    "Upcoming Movies",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                HorizontalView(movies: upcomingMovies),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    "Popular Movies",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                HorizontalView(movies: popularMovies),
+                              ],
+                            ),
+                ],
+              ),
+            ),
           ),
-          searchBar(),
-          isLoading
-              ? const CircularProgressIndicator(
-                  color: Colors.white,
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        "TopRated Movies",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    MovieSlider(topRatedMovies: topRatedMovies),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        "Upcoming Movies",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    HorizontalView(movies: upcomingMovies),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        "Popular Movies",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    HorizontalView(movies: popularMovies),
-                  ],
-                ),
+          Positioned(
+            top: 50,
+            left: 0,
+            right: 0,
+            child: searchBar(),
+          ),
         ],
       ),
     );

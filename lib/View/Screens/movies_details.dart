@@ -16,7 +16,9 @@ class MoviesDetailScreen extends StatefulWidget {
 }
 
 class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
-  List<dynamic> movies = [];
+  List<dynamic> similarMovies = [];
+
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -26,7 +28,10 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
 
   getData() async {
     MovieServices movieServices = MovieServices();
-    movies = await movieServices.similarMovies(widget.movie['id']);
+    similarMovies = await movieServices.similarMovies(widget.movie['id']);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -41,7 +46,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              'https://image.tmdb.org/t/p/w500&${widget.movie['backdrop_path']}',
+              'https://image.tmdb.org/t/p/w500${widget.movie['backdrop_path']}',
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
@@ -119,7 +124,14 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
             const SizedBox(
               height: 15,
             ),
-            HorizontalView(movies: movies)
+            isLoading
+                ? const CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                : HorizontalView(movies: similarMovies),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
