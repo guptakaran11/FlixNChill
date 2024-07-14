@@ -1,4 +1,8 @@
+//* Packages
 import 'package:flutter/material.dart';
+
+//* Screens
+import '../Screens/movies_details.dart';
 
 class HorizontalView extends StatelessWidget {
   final List<dynamic> movies;
@@ -12,7 +16,14 @@ class HorizontalView extends StatelessWidget {
           children: List.generate(movies.length, (index) {
         final movie = movies[index];
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MoviesDetailScreen(movie: movie),
+              ),
+            );
+          },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(
