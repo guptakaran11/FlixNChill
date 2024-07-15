@@ -51,9 +51,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
               height: 200,
               fit: BoxFit.cover,
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Text(
               'Title: ${widget.movie['title']}',
               style: const TextStyle(
@@ -61,9 +59,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Text(
               'Overview: ${widget.movie['overview']}',
               style: const TextStyle(
@@ -71,9 +67,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text(
               'Release Date: ${widget.movie['release_date']}',
               style: const TextStyle(
@@ -81,9 +75,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text(
               'Rating: ${widget.movie['vote_average']}',
               style: const TextStyle(
@@ -91,9 +83,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text(
               'Vote Count: ${widget.movie['vote_count']}',
               style: const TextStyle(
@@ -101,9 +91,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text(
               'Popularity: ${widget.movie['popularity']}',
               style: const TextStyle(
@@ -111,9 +99,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             const Text(
               'Similar Movies',
               style: TextStyle(
@@ -121,9 +107,7 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15),
             isLoading
                 ? const CircularProgressIndicator(
                     color: Colors.white,

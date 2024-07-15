@@ -103,9 +103,7 @@ class _HomePageState extends State<HomePage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 70,
-                  ),
+                  const SizedBox(height: 70),
                   isLoading
                       ? const CircularProgressIndicator(
                           color: Colors.white,
@@ -142,13 +140,9 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20),
                                 MovieSlider(topRatedMovies: topRatedMovies),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20),
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 16),
                                   child: Text(
@@ -159,13 +153,9 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20),
                                 HorizontalView(movies: upcomingMovies),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20),
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 16),
                                   child: Text(
@@ -176,9 +166,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20),
                                 HorizontalView(movies: popularMovies),
                               ],
                             ),

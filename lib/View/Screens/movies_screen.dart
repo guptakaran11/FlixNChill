@@ -36,7 +36,18 @@ class _MoviesScreenState extends State<MoviesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("upcoming movies")),
+      appBar: AppBar(
+        title: const Text("Upcoming movies"),
+        automaticallyImplyLeading:
+            false, // this is to remove the automatic back button from Appbar
+        // This method is to change the automatic back button into custom button
+        // leading: IconButton(
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   icon: const Icon(Icons.list),
+        // ),
+      ),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(

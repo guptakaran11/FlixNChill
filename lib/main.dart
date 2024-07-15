@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 //* Screens
-import 'package:flixnchill/View/Screens/bottom_nav_bar.dart';
+import 'package:flixnchill/View/Screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const BottomNavBar(),
+      home: const SplashScreen(),
     );
   }
 }
