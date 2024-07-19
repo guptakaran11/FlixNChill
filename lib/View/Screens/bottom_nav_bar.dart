@@ -18,6 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    // This is the file to create the bottom nav bar 
     return Scaffold(
       body: PageView(
         onPageChanged: (value) {
