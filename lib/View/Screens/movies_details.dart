@@ -85,18 +85,18 @@ class _MoviesDetailScreenState extends State<MoviesDetailScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Vote Count: ${widget.movie['vote_count']}',
+              'Popularity: ${widget.movie['popularity']}',
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 10),
             Text(
-              'Popularity: ${widget.movie['popularity']}',
+              'Vote Count: ${widget.movie['vote_count']}',
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 20),

@@ -154,7 +154,9 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 const SizedBox(height: 20),
-                                HorizontalView(movies: upcomingMovies), // this is the widget such that to create the list of cards ion horizontally
+                                HorizontalView(
+                                    movies:
+                                        upcomingMovies), // this is the widget such that to create the list of cards ion horizontally
                                 const SizedBox(height: 20),
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 16),
@@ -168,8 +170,12 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(height: 20),
                                 HorizontalView(movies: popularMovies),
+                                const SizedBox(height: 30),
                               ],
                             ),
+                  const SizedBox(
+                    height: 10,
+                  )
                 ],
               ),
             ),
