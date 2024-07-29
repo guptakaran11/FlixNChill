@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'FLiXNChill',
+      title: 'FLiXNChiLL',
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.white,
