@@ -18,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    // This is the file to create the bottom nav bar 
+    // This is the file to create the bottom nav bar
     return Scaffold(
       body: PageView(
         onPageChanged: (value) {
@@ -49,7 +49,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(
+              Icons.home_outlined,
+            ),
             label: "Home",
           ),
           BottomNavigationBarItem(
