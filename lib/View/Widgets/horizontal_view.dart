@@ -13,43 +13,48 @@ class HorizontalView extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: List.generate(movies.length, (index) {
-          final movie = movies[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MoviesDetailScreen(movie: movie),
-                ),
-              );
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Image.network(
-                    'https://image.tmdb.org/t/p/w200${movie['poster_path']}',
-                    width: 150,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  SizedBox(
-                    width: 150,
-                    child: Text(
-                      movie['title'],
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
+        children: List.generate(
+          movies.length,
+          (index) {
+            final movie = movies[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MoviesDetailScreen(
+                      movie: movie,
                     ),
                   ),
-                ],
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    Image.network(
+                      'https://image.tmdb.org/t/p/w200${movie['poster_path']}',
+                      width: 150,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: Text(
+                        movie['title'],
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        }),
+            );
+          },
+        ),
       ),
     );
   }

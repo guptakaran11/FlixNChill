@@ -25,7 +25,9 @@ class FilteredMovieList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MoviesDetailScreen(movie: movie),
+                  builder: (context) => MoviesDetailScreen(
+                    movie: movie,
+                  ),
                 ),
               );
             },
